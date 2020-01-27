@@ -25,36 +25,33 @@ do {
 
   value = Number(readlineSync.question("Enter a value: "));
 
-} while (value < 0 || value > Number.MAX_SAFE_INTEGER)
+} while (value < 0 || value > Number.MAX_SAFE_INTEGER || Number.isNaN(value))
 
 if (value == 1) {
-  startUnit = "mile"
+  startUnit = "mile";
 }
 
-if (endUnit == "inches"){
-  endValue = value * 63,360;
-  if (value == 1) {
-    endUnit == "inch"
-  }
+if (endUnit == "inches") {
+  endValue = value * 63360;
+  endUnit = (endValue === 1) ? "inch" : "inches"
 }
 
-if (endUnit == "feet"){
-  endValue = value * 5,280 ;
-  if (value == 1) {
-    endUnit == "foot"
-  }
+if (endUnit == "feet") {
+  endValue = value * 5280;
+  endUnit = (endValue === 1) ? "foot" : "feet"
 }
 
-if (endUnit == "yards"){
-  endValue = value * 1,760 ;
-  if (value == 1) {
-    endUnit == "yard"
-  }
+if (endUnit == "yards") {
+  endValue = value * 1760;
+    endUnit = (endValue === 1) ? "yard" : "yards"
 }
 
-endValue = endValue.toLocaleString("en", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-if (endValue == 1){
-  console.log("There is " + endValue + endUnit + " in " + value + startUnit + ".")
+endValue = endValue.toLocaleString("en", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+
+value = value.toLocaleString("en", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+
+if (endValue === 1.0) {
+  console.log("There is " + endValue + " " + endUnit + " in " + value + " " + startUnit + ".")
 } else {
-  console.log("There are " + endValue + endUnit + " in " + value + startUnit + ".")
+  console.log("There are " + endValue + " " + endUnit + " in " + value + " " + startUnit + ".")
 }
